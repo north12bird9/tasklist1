@@ -1,10 +1,10 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task.order(created_at: :desc).page(params[:page]).per(4)
   end
 
   def show
-    @task = Task.find (params[:id])
+    set_message
   end
 
   def new
@@ -24,11 +24,11 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find (params[:id])
+    set_message
   end
 
   def update
-    @task = Task.find (params[:id])
+    set_message
     
     if @task.update(task_params)
       flash[:success] = 'タスクが更新されました。'
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
   end  
 
   def destroy
-    @task = Task.find(params[:id])
+    set_message
     @task.destroy
     
     flash[:success] = 'タスクは削除されました。'
@@ -50,6 +50,10 @@ end
 
 private
 
- def task_params
-  params.require(:task).permit(:content)
- end
+def set_message
+   @task = Task.find(params[:id])
+end
+
+def task_params
+  params.require(:task).permit(:content, :status)
+end

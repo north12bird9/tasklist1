@@ -3,8 +3,12 @@
   <%= @task.id %> の詳細ページ
 </h1>
 
-<p>
+<p>タスクの内容:
   <%=@task.content %>
+</p>
+
+<p>タスクの状態:
+  <%=@task.status %>
 </p>
 
 <%= link_to '一覧に戻る', tasks_path %>
