@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    set_message
+    set_task
   end
 
   def new
@@ -24,11 +24,11 @@ class TasksController < ApplicationController
   end
 
   def edit
-    set_message
+    set_task
   end
 
   def update
-    set_message
+    set_task
     
     if @task.update(task_params)
       flash[:success] = 'タスクが更新されました。'
@@ -40,20 +40,22 @@ class TasksController < ApplicationController
   end  
 
   def destroy
-    set_message
+    set_task
     @task.destroy
     
     flash[:success] = 'タスクは削除されました。'
     redirect_to tasks_url
   end
-end
+  
+  private
 
-private
-
-def set_message
+def set_task
    @task = Task.find(params[:id])
 end
 
 def task_params
   params.require(:task).permit(:content, :status)
 end
+
+end
+
