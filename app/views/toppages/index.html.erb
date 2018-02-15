@@ -1,9 +1,9 @@
 <% if logged_in? %>
 
-   <div class="row">
+  <div class="row">
     <aside class="col-md-4">
       
-<%= form_for(@micropost) do |f| %>
+<%= form_for(@task) do |f| %>
 
         <div class="form-group">
           
@@ -19,19 +19,18 @@
     </aside>
     <div class="col-xs-8">
       
-<%= render 'microposts/microposts', microposts: @microposts %>
+<%= render 'tasks/index', tasks: @tasks %>
 
     </div>
   </div>
 <% else %>
 
-<div class="center jumbotron">
-  <div class="text-center">
-    <h1>ようこそタスク管理アプリへ</h1>
-    
-    <%= link_to 'サインイン！', signup_path, class: 'btn btn-lg btn-primary' %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>ようこそタスクリストへ</h1>
+      
+<%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
 
+    </div>
   </div>
-</div>
-
 <% end %>
